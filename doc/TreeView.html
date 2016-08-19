@@ -197,20 +197,40 @@
     <h4 class="name" id="setPipeline"><span class="type-signature"></span>setPipeline<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     
-    <p class="summary"><p>Reconfigure the dataModel's pipeline for tree view.</p></p>
+    <p class="summary"><p>Reconfigure the data model's data pipeline for tree view.</p></p>
     
 
 
 
 <div class="description">
-    <p>The pipeline is reset to <code>options.dataSource</code>.</p>
-<p>Then the tree view filter and sorter data sources are added as requested.</p>
-<p>Finally the tree view data source is added.</p>
-<p>This method can operate on either:</p>
+    <p>The <em>data transformation pipeline</em> is an ordered list of data transformations, always beginning with an actual data source. Each <em>transformation</em> in the pipeline operates on the data source immediately ahead of it. While transformations are free to completely rewrite the data in any way they want, most transformations merely apply an index to the data.</p>
+<p>The <em>shared pipeline</em> is defined on the data model's prototype and is used for all grid instances (using the same data model). A grid can however define a <em>local pipeline</em> on the data model's instance.</p>
+<p>In any case, the actual data pipeline is (re)constructed from a <em>pipeline configuration</em> each time data is set on the grid via <code>setData</code>.</p>
+<p>This method reconfigures the data pipeline suitable for tree view. It is designed to operate on either of:</p>
 <ul>
-<li>A data model prototype, which will affect all data models subsequently created therefrom. The prototype must be given in <code>options.dataModelPrototype</code>.</li>
-<li>The current data model instance. In this case, the instance is given its own new pipeline.</li>
+<li>the &quot;shared&quot; pipeline configuration (on the grid's data model's prototype)</li>
+<li>the grid's &quot;local&quot; pipeline configuration (on the grid's data model's instance)</li>
 </ul>
+<p>This method operates as follows:</p>
+<ol>
+<li>Reset the pipeline:<ul>
+<li>In the case of the shared pipeline, the array is truncated in place.</li>
+<li>In the case of an instance pipeline, a new array is created.</li>
+</ul>
+</li>
+<li>Add the first data source:<ul>
+<li>The data source provided in <code>options.firstPipe</code> is used if given; otherwise...</li>
+<li>The existing pipeline configuration's first data source will be reused. (First time in, this will always come from the prototype's version.)</li>
+</ul>
+</li>
+<li>Add the filter data source (if requested).</li>
+<li>Add the tree sorter data source (if requested).</li>
+<li>Finally, add the tree view data source.</li>
+</ol>
+<p>Step 1 above operates on the shared pipeline when you supply the data model's prototype in <code>options.dataModelPrototype</code> (see below). In this case, you have the option of calling this method <em>before</em> instantiating your grid(s):</p>
+<pre class="prettyprint source lang-javascript"><code>var JSON = Hypergrid.dataModels.JSON.prototype;
+var pipelineOptions = { dataModelPrototype: JSON.prototype }
+TreeView.prototype.setPipeline(pipelineOptions);</code></pre><p>This approach avoids the need to reset the data after reconfiguring the pipeline (in which case, do <em>not</em> call this method again after instantiation).</p>
 </div>
 
 
@@ -292,12 +312,92 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>includeFilter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Enables filtering. Includes the filter data source. The filter row is hidden if falsy.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>includeSorter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last"><p>Enables sorting. Includes the specialized tree sorter data source.</p></td>
+        </tr>
+
     
 
         <tr>
@@ -327,14 +427,15 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
-            <td class="description last"><p>Adds requested pipes to the &quot;shared&quot; pipeline.</p>
-<p>Supply this option when you want to set up the &quot;shared&quot; pipeline on the data model prototype, which would then be available to all grid instances subsequently created thereafter.</p>
-<p>You can even do this before Hypergrid instantiation:</p>
-<pre class="prettyprint source lang-javascript"><code>var JSON = Hypergrid.dataModels.JSON.prototype;
-var pipelineOptions = { dataModelPrototype: JSON.prototype }
-TreeView.prototype.setPipeline(pipelineOptions);</code></pre><p>(In this case, you should <em>not</em> call this method again after instantiation.)</p>
-<p>If omitted, a new &quot;own&quot; (instance) pipeline is created, overriding the prototype's (shared) pipeline.</p></td>
+            <td class="description last"><p>Adds requested pipes to the &quot;shared&quot; pipeline array object instead of to a new custom (instance) pipeline array object.</p>
+<p>Supply this option when you want to set up the &quot;shared&quot; pipeline on the data model prototype, which would then be available to all grid instances subsequently created thereafter. In this case, you can call this method before or after grid instantiation. To call it before, call it directly on <code>TreeView.prototype</code>; to call it after, call it normally (on the <code>TreeView</code> instance).</p>
+<p>If omitted, a new &quot;own&quot; (instance) pipeline is created, overriding the prototype's (shared) pipeline. (In this case this method must be called normally, on the <code>Treeview</code> instance.)</p>
+<p>In either case, if called &quot;normally&quot; (on the instance), the data is reset via <code>setData</code>. (If called on the prototype it is not reset here. Currently the <code>Hypergrid</code> constructor calls it.)</p></td>
         </tr>
 
     
@@ -365,6 +466,10 @@ TreeView.prototype.setPipeline(pipelineOptions);</code></pre><p>(In this case, y
                 </td>
             
 
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>Use as first data source in the new pipeline. If undefined, the existing pipeline's first data source will be reused.</p></td>
