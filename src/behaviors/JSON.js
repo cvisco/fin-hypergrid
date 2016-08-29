@@ -32,7 +32,6 @@ var JSON = Local.extend('behaviors.JSON', {
     features: [
         features.CellSelection,
         features.KeyPaging,
-        features.ColumnPicker,
         features.ColumnResizing,
         features.RowResizing,
         features.RowSelection,

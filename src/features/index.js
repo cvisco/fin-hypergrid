@@ -12,7 +12,6 @@ module.exports = {
     ColumnSorting: require('./ColumnSorting'),
     KeyPaging: require('./KeyPaging'),
     OnHover: require('./OnHover'),
-    ColumnPicker: require('./ColumnPicker'),
     RowResizing: require('./RowResizing'),
     RowSelection: require('./RowSelection'),
     ThumbwheelScrolling: require('./ThumbwheelScrolling')

@@ -5,7 +5,6 @@ var _ = require('object-iterators');
 var Base = require('../lib/Base');
 
 var Column = require('./Column');
-var dialogs = require('../dialogs');
 
 var noExportProperties = [
     'columnHeader',
@@ -968,16 +967,6 @@ var Behavior = Base.extend('Behavior', {
             this.featureChain.handleDoubleClick(grid, event);
             this.setCursor(grid);
         }
-    },
-
-    /**
-     * @memberOf Behavior.prototype
-     * @desc delegate handling double click to the feature chain of responsibility
-     * @param {Hypergrid} grid
-     * @param {string[]} [options] - Forwarded to dialog constructor.
-     */
-    openDialog: function(dialogName, options) {
-        return new dialogs[dialogName](this.grid, options);
     },
 
     /**
