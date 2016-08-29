@@ -154,9 +154,8 @@ var JSON = DataModel.extend('dataModels.JSON', {
             var bottomTotals = this.getBottomTotals();
             value = bottomTotals[bottomTotals.length + y][x];
         } else {
-            var isFilterRow = this.grid.isShowFilterRow(),
-                isHeaderRow = this.grid.isShowHeaderRow(),
-                topTotalsOffset = (isFilterRow ? 1 : 0) + (isHeaderRow ? 1 : 0);
+            var isHeaderRow = this.grid.isShowHeaderRow(),
+                topTotalsOffset = isHeaderRow ? 1 : 0;
             if (y >= topTotalsOffset) { // top totals rows
                 value = this.getTopTotals()[y - topTotalsOffset][x];
             } else if (isHeaderRow && y === 0) {
@@ -211,17 +210,14 @@ var JSON = DataModel.extend('dataModels.JSON', {
         if (value === undefined) {
             return this._setHeader(x, y); // y is really the value
         }
-        var isFilterRow = this.grid.isShowFilterRow();
         var isHeaderRow = this.grid.isShowHeaderRow();
-        var topTotalsOffset = (isFilterRow ? 1 : 0) + (isHeaderRow ? 1 : 0);
+        var topTotalsOffset = isHeaderRow ? 1 : 0;
         if (y >= topTotalsOffset) {
             this.getTopTotals()[y - topTotalsOffset][x] = value;
         } else if (x === -1) {
             return; // can't change the row numbers header
         } else if (isHeaderRow && y === 0) {
             return this._setHeader(x, value);
-        } else if (isFilterRow) {
-            this.setFilter(x, value, { alert: true });
         } else {
             return this._setHeader(x, value);
         }

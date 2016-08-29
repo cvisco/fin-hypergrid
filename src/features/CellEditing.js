@@ -37,11 +37,10 @@ var CellEditing = Feature.extend('CellEditing', {
         var headerRowCount = grid.behavior.getHeaderRowCount();
         var headerColumnCount = grid.behavior.getHeaderColumnCount();
         var gridCell = event.gridCell;
-        var isFilterRow = grid.isFilterRow(gridCell.y);
 
         return isDoubleClickEditorActivation &&
             gridCell.x >= headerColumnCount &&
-            (isFilterRow || gridCell.y >= headerRowCount);
+            gridCell.y >= headerRowCount;
     },
 
     /**

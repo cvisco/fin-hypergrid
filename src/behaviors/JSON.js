@@ -2,7 +2,6 @@
 
 var Local = require('./Local');
 var DataModelJSON = require('../dataModels/JSON');
-var ColumnSchemaFactory = require('../filter/ColumnSchemaFactory');
 var features = require('../features');
 
 /**
@@ -36,7 +35,6 @@ var JSON = Local.extend('behaviors.JSON', {
         features.ColumnPicker,
         features.ColumnResizing,
         features.RowResizing,
-        features.Filters,
         features.RowSelection,
         features.ColumnSelection,
         features.ColumnMoving,
@@ -66,7 +64,6 @@ var JSON = Local.extend('behaviors.JSON', {
             var properties = column.getProperties();
             properties.field = fields[index];
             properties.header = header;
-            properties.complexFilter = null;
             if (calculator) {
                 properties.calculator = calculator;
             }
@@ -123,7 +120,6 @@ var JSON = Local.extend('behaviors.JSON', {
      * @param {function|object[]} [dataRows] - Array of uniform objects containing the grid data. If omitted, the previous data source will be re-used.
      * @param {object} [options]
      * @param {function|object} [options.fields] - Array of field names. Passed as 2nd param to `this.dataModel.setData`. If omitted (along with `dataSource`), the previous fields array will be re-used.
-     * @param {function|object} [options.schema=deriveSchema] - Used in filter instantiation.
      */
     setData: function(dataRows, options) {
         var self = this,
@@ -137,9 +133,6 @@ var JSON = Local.extend('behaviors.JSON', {
 
         this.dataModel.setData(dataRows, fields, calculators);
         this.createColumns();
-
-        this.schema = options && options.schema || deriveSchema;
-        this.setGlobalFilter(this.getNewFilter());
 
         if (grid.cellEditor) {
             grid.cellEditor.cancelEditing();
@@ -279,12 +272,6 @@ var JSON = Local.extend('behaviors.JSON', {
     }
 
 });
-
-
-function deriveSchema() {
-    return new ColumnSchemaFactory(this.columns).schema;
-}
-
 
 //Logic to moved to adapter layer outside of Hypergrid Core
 function removeHiddenColumns(oldSorted, hiddenColumns){

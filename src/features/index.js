@@ -10,7 +10,6 @@ module.exports = {
     ColumnResizing: require('./ColumnResizing'),
     ColumnSelection: require('./ColumnSelection'),
     ColumnSorting: require('./ColumnSorting'),
-    Filters: require('./Filters'),
     KeyPaging: require('./KeyPaging'),
     OnHover: require('./OnHover'),
     ColumnPicker: require('./ColumnPicker'),

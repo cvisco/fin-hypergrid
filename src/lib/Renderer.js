@@ -962,7 +962,6 @@ var Renderer = Base.extend('Renderer', {
             isGridRow = r >= headerRowCount,
             isFooterRow = r < 0,
             isHeaderRow = !isGridRow && !isFooterRow,
-            isFilterRow = grid.isFilterRow(r),
 
             headerColumnCount = behavior.getHeaderColumnCount(),
             isGridColumn = c >= headerColumnCount,
@@ -987,10 +986,7 @@ var Renderer = Base.extend('Renderer', {
             }
             cellProperties.isUserDataArea = false;
         } else if (isHeaderRow || isFooterRow) {
-            if (isFilterRow) {
-                cellProperties = Object.create(baseProperties.filterProperties);
-                cellProperties.isSelected = false;
-            } else if (isColumnSelected) {
+            if (isColumnSelected) {
                 cellProperties = Object.create(baseProperties.columnHeaderColumnSelection);
                 cellProperties.isSelected = true;
             } else {
@@ -1012,8 +1008,6 @@ var Renderer = Base.extend('Renderer', {
         if (c === -1) {
             if (r === 0) { // header row gets "master" checkbox
                 cellProperties.value = [images.checkbox(areAllRowsSelected), '', null];
-            } else if (isFilterRow) { // no checkbox but show filter icon
-                cellProperties.value = [images.filter(false), '', null];
             } else if (isHeaderRow || isFooterRow) { // no checkbox on "totals" rows
                 cellProperties.value = '';
             } else {

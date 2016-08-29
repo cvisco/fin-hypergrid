@@ -23,7 +23,6 @@ function CellEditors(grid, privateRegistry) {
         this.add(require('./ComboBox'));
         this.add(require('./Color'));
         this.add(require('./Date'));
-        this.add(require('./FilterBox'));
         this.add(require('./Number'));
         this.add(require('./Slider'));
         this.add(require('./Spinner'));

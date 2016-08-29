@@ -197,57 +197,6 @@ module.exports = {
      */
     rowHeaderBackgroundRowSelectionColor: 'rgb(255, 180, 0)',
 
-
-    /********** SECTION: FILTER ROW COLORS **********/
-
-    /**
-     * @default
-     * @type {cssFont}
-     * @instance
-     */
-    filterFont: '12px Tahoma, Geneva, sans-serif',
-
-    /**
-     * @default
-     * @type {cssColor}
-     * @instance
-     */
-    filterColor: 'rgb(25, 25, 25)',
-
-    /**
-     * @default
-     * @type {cssColor}
-     * @instance
-     */
-    filterBackgroundColor: 'white',
-
-    /**
-     * @default
-     * @type {cssColor}
-     * @instance
-     */
-    filterForegroundSelectionColor: 'rgb(25, 25, 25)',
-
-    /**
-     * @default
-     * @type {cssColor}
-     * @instance
-     */
-    filterBackgroundSelectionColor: 'rgb(255, 220, 97)',
-
-    /**
-     * @default
-     * @type {cssColor}
-     * @instance
-     */
-    filterCellBorderStyle: 'rgba(0,0,0,0.8)',
-
-    /**
-     * @default
-     * @type {number}
-     * @instance
-     */
-    filterCellBorderThickness: 0.4,
     /********** SECTION: TREE COLUMN COLORS **********/
     // The "tree column" contains the hierarchical drill-down controls.
 
@@ -527,14 +476,6 @@ module.exports = {
      * @instance
      */
     showHeaderRow: true,
-
-    /**
-     * @default
-     * @type {boolean}
-     * @instance
-     */
-    showFilterRow: true,
-
 
     /** Clicking in a cell "selects" it; it is added to the select region and repainted with "cell selection" colors.
      * @default

@@ -1260,7 +1260,7 @@ Hypergrid.prototype = {
             var column = this.behavior.getActiveColumn(editPoint.x),
                 editable = column && column.getProperties().editable;
 
-            if (editable || this.isFilterRow(editPoint.y)) {
+            if (editable) {
                 this.setMouseDown(editPoint);
                 this.setDragExtent(new Point(0, 0));
                 cellEditor = this.getCellEditorAt(editPoint);
@@ -2823,31 +2823,29 @@ Hypergrid.prototype = {
     },
 
     toggleSelectRow: function(y, keys) {
-        //we can select the totals rows if they exist, but not rows above that
-        if (y > this.getFilterRowIndex()) {
-            keys = keys || [];
+        keys = keys || [];
 
-            var sm = this.selectionModel;
-            var alreadySelected = sm.isRowSelected(y);
-            var hasSHIFT = keys.indexOf('SHIFT') >= 0;
+        var sm = this.selectionModel;
+        var alreadySelected = sm.isRowSelected(y);
+        var hasSHIFT = keys.indexOf('SHIFT') >= 0;
 
-            if (alreadySelected) {
-                sm.deselectRow(y);
-            } else {
-                this.singleSelect();
-                sm.selectRow(y);
-            }
-
-            if (hasSHIFT) {
-                sm.clear();
-                sm.selectRow(this.lastEdgeSelection[1], y);
-            }
-
-            if (!alreadySelected && !hasSHIFT) {
-                this.lastEdgeSelection[1] = y;
-            }
-            this.repaint();
+        if (alreadySelected) {
+            sm.deselectRow(y);
+        } else {
+            this.singleSelect();
+            sm.selectRow(y);
         }
+
+        if (hasSHIFT) {
+            sm.clear();
+            sm.selectRow(this.lastEdgeSelection[1], y);
+        }
+
+        if (!alreadySelected && !hasSHIFT) {
+            this.lastEdgeSelection[1] = y;
+        }
+
+        this.repaint();
     },
 
     singleSelect: function() {
@@ -2980,20 +2978,11 @@ Hypergrid.prototype = {
     isEditable: function() {
         return this.resolveProperty('editable') === true;
     },
-    isShowFilterRow: function() {
-        return this.resolveProperty('showFilterRow');
-    },
     isShowHeaderRow: function() {
         return this.resolveProperty('showHeaderRow');
     },
     getHeaderRowCount: function() {
         return this.behavior.getHeaderRowCount();
-    },
-    isFilterRow: function(y) {
-        return y === this.getFilterRowIndex();
-    },
-    getFilterRowIndex: function() {
-        return !this.isShowFilterRow() ? -1 : this.isShowHeaderRow() ? 1 : 0;
     },
     hasHierarchyColumn: function() {
         return this.behavior.hasHierarchyColumn();
@@ -3020,7 +3009,7 @@ Hypergrid.prototype = {
     },
     selectRow: function(y1, y2) {
         var sm = this.selectionModel;
-        var selectionEdge = this.getFilterRowIndex() + 1;
+        var selectionEdge = 0;
 
         if (this.singleSelect()) {
             y1 = y2;
