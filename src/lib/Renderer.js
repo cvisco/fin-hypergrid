@@ -973,7 +973,6 @@ var Renderer = Base.extend('Renderer', {
             isCellSelected = grid.isCellSelected(c, r),
             isCellSelectedInColumn = grid.isCellSelectedInColumn(c),
             isCellSelectedInRow = grid.isCellSelectedInRow(r),
-            areAllRowsSelected = grid.areAllRowsSelected(),
             cellProperties;
 
         if ((isShowRowNumbers && c === -1) || isHierarchyColumn) {
@@ -1006,12 +1005,12 @@ var Renderer = Base.extend('Renderer', {
         var rowNum = r - headerRowCount + 1;
 
         if (c === -1) {
-            if (r === 0) { // header row gets "master" checkbox
-                cellProperties.value = [images.checkbox(areAllRowsSelected), '', null];
-            } else if (isHeaderRow || isFooterRow) { // no checkbox on "totals" rows
+            if (r === 0) {
+                cellProperties.value = [null, '', null];
+            } else if (isHeaderRow || isFooterRow) {
                 cellProperties.value = '';
             } else {
-                cellProperties.value = [images.checkbox(isRowSelected), rowNum, null];
+                cellProperties.value = [null, rowNum, null];
             }
             cellProperties.halign = 'right';
         } else {
