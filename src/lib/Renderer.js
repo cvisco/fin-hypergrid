@@ -801,8 +801,6 @@ var Renderer = Base.extend('Renderer', {
             loopStart = this.grid.isShowRowNumbers() ? -1 : 0,
             loopLength = visibleCols.length; // regardless of loopStart, due to definition of .length
 
-        this.buttonCells = {};
-
         if (loopLength) { // this if prevents painting just the fixed columns when there are no visible columns
 
             // For each column...
@@ -1050,19 +1048,11 @@ var Renderer = Base.extend('Renderer', {
             _(cellProperties).extendOwn(overrides);
         }
 
-        //allow the renderer to identify itself if it's a button
-        cellProperties.buttonCells = this.buttonCells;
-
         cellProperties.formatValue = grid.getFormatter(cellProperties.isUserDataArea && cellProperties.format);
         cell.paint(gc, cellProperties);
 
         this.renderedColumnMinWidths[c] = Math.max(cellProperties.minWidth || 0, this.renderedColumnMinWidths[c]);
         columnProperties.preferredWidth = this.renderedColumnMinWidths[c];
-    },
-
-    isViewableButton: function(c, r) {
-        var key = c + ',' + r;
-        return this.buttonCells[key] === true;
     },
 
     getRowNumbersWidth: function() {

@@ -919,9 +919,6 @@ Hypergrid.prototype = {
             var mouseEvent = self.getGridCellFromMousePoint(mouse);
             mouseEvent.primitiveEvent = e;
             self.delegateMouseUp(mouseEvent);
-            if (self.mouseDownState) {
-                self.fireSyntheticButtonPressedEvent(self.mouseDownState);
-            }
             self.mouseDownState = null;
             self.fireSyntheticMouseUpEvent(mouseEvent);
         });
@@ -1806,22 +1803,6 @@ Hypergrid.prototype = {
         this.canvas.dispatchEvent(event);
     },
 
-    isViewableButton: function(c, r) {
-        return this.getRenderer().isViewableButton(c, r);
-    },
-
-    fireSyntheticButtonPressedEvent: function(evt) {
-        var dataCell = evt.dataCell;
-        var gridCell = evt.gridCell;
-        if (this.isViewableButton(dataCell.x, dataCell.y)) {
-            var event = new CustomEvent('fin-button-pressed', {
-                detail: {
-                    gridCell: gridCell
-                }
-            });
-            this.canvas.dispatchEvent(event);
-        }
-    },
     /**
      * @memberOf Hypergrid.prototype
      * @desc Synthesize and fire a `fin-column-drag-start` event.

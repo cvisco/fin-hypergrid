@@ -17,7 +17,6 @@ function CellRenderers(privateRegistry) {
     // preregister the standard cell renderers
     if (privateRegistry || !this.get('emptycell')) {
         this.add('EmptyCell', require('./CellRenderer'));
-        this.add(require('./Button'));
         this.add(require('./SimpleCell'));
         this.add(require('./SliderCell'));
         this.add(require('./SparkBar'));
