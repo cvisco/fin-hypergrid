@@ -20,13 +20,6 @@ function CellEditors(grid, privateRegistry) {
     // preregister the standard cell editors
     if (privateRegistry || !this.get('celleditor')) {
         this.add(require('./CellEditor'));
-        this.add(require('./ComboBox'));
-        this.add(require('./Color'));
-        this.add(require('./Date'));
-        this.add(require('./Number'));
-        this.add(require('./Slider'));
-        this.add(require('./Spinner'));
-        this.add(require('./Textfield'));
     }
 }
 

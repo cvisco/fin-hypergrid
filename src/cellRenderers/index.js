@@ -18,12 +18,7 @@ function CellRenderers(privateRegistry) {
     if (privateRegistry || !this.get('emptycell')) {
         this.add('EmptyCell', require('./CellRenderer'));
         this.add(require('./SimpleCell'));
-        this.add(require('./SliderCell'));
-        this.add(require('./SparkBar'));
-        this.add(require('./LastSelection'));
-        this.add(require('./SparkLine'));
         this.add(require('./ErrorCell'));
-        this.add(require('./TreeCell'));
     }
 }
 

@@ -497,101 +497,7 @@ var Renderer = Base.extend('Renderer', {
         this.paintCells(gc);
         this.paintGridlines(gc);
         this.renderOverrides(gc);
-        this.renderLastSelection(gc);
         gc.closePath();
-    },
-
-    renderLastSelection: function(gc) {
-        gc.beginPath();
-        this._renderLastSelection(gc);
-        gc.closePath();
-    },
-
-    _renderLastSelection: function(gc) {
-
-        /*
-
-            Compute the Bounds of the Last Selection that is visible
-
-         */
-
-        var selections = this.grid.selectionModel.getSelections();
-        if (!selections || selections.length === 0) {
-            return;
-        }
-        var selection = this.grid.selectionModel.getLastSelection();
-        var mouseDown = selection.origin;
-        if (mouseDown.x === -1) {
-            //no selected area, lets exit
-            return;
-        }
-
-        var visibleColumns = this.getVisibleColumns();
-        var visibleRows = this.getVisibleRows();
-        var lastVisibleColumn = visibleColumns[visibleColumns.length - 1];
-        var lastVisibleRow = visibleRows[visibleRows.length - 1];
-
-        var extent = selection.extent;
-
-        var dpOX = Math.min(mouseDown.x, mouseDown.x + extent.x);
-        var dpOY = Math.min(mouseDown.y, mouseDown.y + extent.y);
-
-        //lets check if our selection rectangle is scrolled outside of the visible area
-        if (dpOX > lastVisibleColumn) {
-            return; //the top of our rectangle is below visible
-        }
-        if (dpOY > lastVisibleRow) {
-            return; //the left of our rectangle is to the right of being visible
-        }
-
-        var dpEX = Math.max(mouseDown.x, mouseDown.x + extent.x) + 1;
-        dpEX = Math.min(dpEX, 1 + lastVisibleColumn);
-
-        var dpEY = Math.max(mouseDown.y, mouseDown.y + extent.y) + 1;
-        dpEY = Math.min(dpEY, 1 + lastVisibleRow);
-
-        var o = this._getBoundsOfCell(dpOX, dpOY);
-        var ox = Math.round((o.x === undefined) ? this.grid.getFixedColumnsWidth() : o.x);
-        var oy = Math.round((o.y === undefined) ? this.grid.getFixedRowsHeight() : o.y);
-        // var ow = o.width;
-        // var oh = o.height;
-        var e = this._getBoundsOfCell(dpEX, dpEY);
-        var ex = Math.round((e.x === undefined) ? this.grid.getFixedColumnsWidth() : e.x);
-        var ey = Math.round((e.y === undefined) ? this.grid.getFixedRowsHeight() : e.y);
-        // var ew = e.width;
-        // var eh = e.height;
-        var x = Math.min(ox, ex);
-        var y = Math.min(oy, ey);
-        var width = 1 + ex - ox;
-        var height = 1 + ey - oy;
-        if (x === ex) {
-            width = ox - ex;
-        }
-        if (y === ey) {
-            height = oy - ey;
-        }
-        if (width * height < 1) {
-            //if we are only a skinny line, don't render anything
-            return;
-        }
-
-        /*
-
-          Render the selection model around the bounds
-
-         */
-
-        var config = {
-            bounds: {
-                x: x,
-                y: y,
-                width: width,
-                height: height
-            },
-            selectionRegionOverlayColor: this.grid.resolveProperty('selectionRegionOverlayColor'),
-            selectionRegionOutlineColor: this.grid.resolveProperty('selectionRegionOutlineColor')
-        };
-        this.grid.cellRenderers.get('lastselection').paint(gc, config);
     },
 
     /**
@@ -824,13 +730,8 @@ var Renderer = Base.extend('Renderer', {
                     r = visibleRows[y];
 
                     try {
-
                         this._paintCell(gc, c, r);
-
-                        //if (r === 9 && c === 2) { throw Error('She sells sea shells by the sea shore.'); }
-
                     } catch (e) {
-
                         message = e && (e.message || e) || 'Unknown error.';
 
                         console.error(message);
