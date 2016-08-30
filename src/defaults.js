@@ -361,7 +361,7 @@ module.exports = {
      * @type {number}
      * @instance
      */
-    defaultRowHeight: 15,
+    defaultRowHeight: 32,
 
     /**
      * @default
