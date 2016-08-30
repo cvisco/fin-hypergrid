@@ -39,21 +39,16 @@ gulp.task('build', function(callback) {
     clearBashScreen();
     runSequence(
         'lint',
-        'test',
         'images',
         'html-templates',
         'css-templates',
-        'add-ons',
-        //'doc',
-        //'beautify',
         'browserify',
         callback
     );
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', function() {
     gulp.watch([
-        './add-ons/*.js',
         srcDir + '**',
         '!' + srcDir + 'jsdoc/**',
         './css/*.css',
@@ -64,14 +59,6 @@ gulp.task('watch', function () {
     ], [
         'build'
     ]);
-
-    gulp.watch([
-        demoDir + '*.html',
-        demoDir + 'css/demo.css',
-        buildDir + '*'
-    ], [
-        'reloadBrowsers'
-    ]);
 });
 
 gulp.task('default', ['build', 'watch'], browserSyncLaunchServer);
@@ -80,7 +67,6 @@ gulp.task('default', ['build', 'watch'], browserSyncLaunchServer);
 
 function lint() {
     return gulp.src([
-        './add-ons/*.js',
         srcDir + jsFiles,
         '!' + srcDir + '**/old/**/',
         demoDir + 'js/demo.js',
@@ -153,7 +139,7 @@ function clearBashScreen() {
 function swallowImages() {
     var config = {
         src: {
-            globs: [ 'images/*.png', 'images/*.gif','images/*.jpeg', 'images/*.jpg' ],
+            globs: [ 'images/*.png', 'images/*.gif', 'images/*.jpeg', 'images/*.jpg' ],
             options: {}
         },
         transform: {
