@@ -13,6 +13,7 @@ var LRUCache = require('lru-cache');
 
 module.exports = {
 
+    // TODO: change this
     /**
      * The font for data cells.
      * @default
@@ -28,7 +29,7 @@ module.exports = {
      * @type {cssFont}
      * @instance
      */
-    font: '13px Tahoma, Geneva, sans-serif',
+    font: '12px Menlo, Monaco, Consolas, Courier New, monospace',
 
     /**
      * Font color for data cells.
@@ -36,7 +37,7 @@ module.exports = {
      * @type {string}
      * @instance
      */
-    color: 'rgb(25, 25, 25)',
+    color: '#333D47',
 
     /**
      * Background color for data cells.
@@ -44,36 +45,49 @@ module.exports = {
      * @type {string}
      * @instance
      */
-    backgroundColor: 'rgb(241, 241, 241)',
+    backgroundColor: '#FFF',
 
+    // TODO: add that to implementation
+    /**
+     * Background color for odd data cells.
+     * @default
+     * @type {string}
+     * @instance
+     */
+    //backgroundAdditionalColor: 'rgba(151,172,172,.05)',
+
+    // TODO: remove that
     /**
      * Font style for selected cell(s).
      * @default
      * @type {string}
      * @instance
      */
-    foregroundSelectionFont: 'bold 13px Tahoma, Geneva, sans-serif',
+    foregroundSelectionFont: '12px Menlo, Monaco, Consolas, Courier New, monospace',
 
+    // TODO: remove that
     /**
      * Font color for selected cell(s).
      * @default
      * @type {string}
      * @instance
      */
-    foregroundSelectionColor: 'rgb(0, 0, 128)',
+    foregroundSelectionColor: '#333D47',
+
     /**
      * @default
      * @type {boolean}
      * @instance
      */
-    sortOnHiddenColumns: true,
+    sortOnHiddenColumns: false,
+
     /**
      * Background color for selected cell(s).
      * @default
      * @type {string}
      * @instance
      */
-    backgroundSelectionColor: 'rgba(147, 185, 255, 0.625)',
+    backgroundSelectionColor: '#BFE0E6',
 
 
     /********** SECTION: COLUMN HEADER COLORS **********/
@@ -85,57 +99,58 @@ module.exports = {
      * @type {cssFont}
      * @instance
      */
-    columnHeaderFont: '12px Tahoma, Geneva, sans-serif',
+    columnHeaderFont: '14px Helvetica Neue, Helvetica, Arial, sans-serif',
 
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    columnHeaderColor: 'rgb(25, 25, 25)',
+    columnHeaderColor: '#597889',
 
+    // TODO: remove this
     /**
      * Font style for selected columns' headers.
      * @default
      * @type {string}
      * @instance
      */
-    columnHeaderForegroundSelectionFont: 'bold 12px Tahoma, Geneva, sans-serif',
+    columnHeaderForegroundSelectionFont: '14px Helvetica Neue, Helvetica, Arial, sans-serif',
 
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    columnHeaderBackgroundColor: 'rgb(223, 227, 232)',
+    columnHeaderBackgroundColor: '#F2F4F6',
 
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    columnHeaderForegroundSelectionColor: 'rgb(80, 80, 80)',
+    columnHeaderForegroundSelectionColor: '#FFF',
 
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    columnHeaderBackgroundSelectionColor: 'rgba(255, 220, 97, 0.45)',
+    columnHeaderBackgroundSelectionColor: '#0285CB',
 
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    columnHeaderForegroundColumnSelectionColor: 'rgb(25, 25, 25)',
+    columnHeaderForegroundColumnSelectionColor: '#FFF',
 
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    columnHeaderBackgroundColumnSelectionColor: 'rgb(255, 180, 0)',
+    columnHeaderBackgroundColumnSelectionColor: '#0285CB',
 
 
     /********** SECTION: ROW HEADER COLORS **********/
@@ -145,124 +160,132 @@ module.exports = {
      * @type {cssFont}
      * @instance
      */
-    rowHeaderFont: '12px Tahoma, Geneva, sans-serif',
+    rowHeaderFont: '13px Helvetica Neue, Helvetica, Arial, sans-serif',
 
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    rowHeaderColor: 'rgb(25, 25, 25)',
+    rowHeaderColor: '#BFCBD1',
 
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    rowHeaderBackgroundColor: 'rgb(223, 227, 232)',
+    rowHeaderBackgroundColor: '#F2F4F6',
 
+    // TODO: check if needed and remove
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    rowHeaderForegroundSelectionColor: 'rgb(80, 80, 80)',
+    rowHeaderForegroundSelectionColor: '#BFCBD1',
 
+    // TODO: remove this
     /**
      * Font style for selected rows' headers.
      * @default
      * @type {string}
      * @instance
      */
-    rowHeaderForegroundSelectionFont: 'bold 12px Tahoma, Geneva, sans-serif',
+    rowHeaderForegroundSelectionFont: '13px Helvetica Neue, Helvetica, Arial, sans-serif',
 
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    rowHeaderBackgroundSelectionColor: 'rgba(255, 220, 97, 0.45)',
+    rowHeaderBackgroundSelectionColor: '#F2F4F6',
 
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    rowHeaderForegroundRowSelectionColor: 'rgb(25, 25, 25)',
+    rowHeaderForegroundRowSelectionColor: '#BFCBD1',
 
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    rowHeaderBackgroundRowSelectionColor: 'rgb(255, 180, 0)',
+    rowHeaderBackgroundRowSelectionColor: '#F2F4F6',
 
     /********** SECTION: TREE COLUMN COLORS **********/
     // The "tree column" contains the hierarchical drill-down controls.
-
+    // TODO: remove this
     /**
      * @default
      * @type {cssFont}
      * @instance
      */
     treeColumnFont: '12px Tahoma, Geneva, sans-serif',
-
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
     treeColumnColor: 'rgb(25, 25, 25)',
-
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
     treeColumnBackgroundColor: 'rgb(223, 227, 232)',
-
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
     treeColumnForegroundSelectionColor: 'rgb(25, 25, 25)',
-
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
     treeColumnBackgroundSelectionColor: 'rgba(255, 220, 97, 0.45)',
-
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
     treeColumnForegroundColumnSelectionColor: 'rgb(25, 25, 25)',
-
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
     treeColumnBackgroundColumnSelectionColor: 'rgb(255, 180, 0)',
-
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
      * @instance
      */
-    backgroundColor2: 'rgb(201, 201, 201)',
+    backgroundColor2: 'red',
+
 
     /**
+     * Vertical offset of the cell
      * @default
      * @type {number}
      * @instance
      */
     voffset: 0,
 
+    // TODO: understand wats going on here
     /**
      * @default
      * @type {string}
@@ -270,6 +293,7 @@ module.exports = {
      */
     scrollbarHoverOver: 'visible',
 
+    // TODO: understand wats going on here
     /**
      * @default
      * @type {string}
@@ -284,6 +308,8 @@ module.exports = {
      */
     scrollingEnabled: true,
 
+
+    // TODO: check if needed
     /**
      * @default
      * @type {string}
@@ -291,6 +317,8 @@ module.exports = {
      */
     vScrollbarClassPrefix: '',
 
+
+    // TODO: check if needed
     /**
      * @default
      * @type {string}
@@ -300,6 +328,8 @@ module.exports = {
 
     //these used to be in the constants element
 
+
+    // TODO: looks like it is not needed
     /**
      * @default
      * @type {string}
@@ -307,6 +337,7 @@ module.exports = {
      */
     fixedRowAlign: 'center',
 
+    // TODO: looks like it is not needed
     /**
      * @default
      * @type {string}
@@ -314,14 +345,17 @@ module.exports = {
      */
     fixedColAlign: 'center',
 
+    // TODO: fix the case when it is changed while resizing the column width
     /**
+     * Horizontal padding of cell
      * @default
      * @type {number}
      * @instance
      */
-    cellPadding: 5,
+    cellPadding: 10,
 
     /**
+     * Show / hide the horizontal lines in grid
      * @default
      * @type {boolean}
      * @instance
@@ -329,11 +363,14 @@ module.exports = {
     gridLinesH: true,
 
     /**
+     * * Show / hide the vertical lines in grid
      * @default
      * @type {boolean}
      * @instance
      */
     gridLinesV: true,
+
+    // TODO: remove that
     /**
      * @default
      * @type {boolean}
@@ -341,22 +378,25 @@ module.exports = {
      */
     gridLinesVOverflow: false,
 
+    // TODO: refactor this approach. Provide the posibility to change the border of particular column
     /**
+     * Grid cell border color
      * @default
      * @type {cssColor}
      * @instance
      */
-    lineColor: 'rgb(199, 199, 199)',
+    lineColor: '#EBEFF1',
 
     /**
+     * Cell border width
      * @default
      * @type {number}
      * @instance
      */
-    lineWidth: 0.4,
-
+    lineWidth: 1,
 
     /**
+     * Cell height
      * @default
      * @type {number}
      * @instance
@@ -364,6 +404,7 @@ module.exports = {
     defaultRowHeight: 32,
 
     /**
+     * Default column width
      * @default
      * @type {number}
      * @instance
@@ -371,7 +412,7 @@ module.exports = {
     defaultColumnWidth: 100,
 
     //for immediate painting, set these values to 0, true respectively
-
+    // TODO: play with this parameters to get a better understanding how to render big data set
     /**
      * @default
      * @type {number}
@@ -386,9 +427,8 @@ module.exports = {
      */
     repaintImmediately: false,
 
-    //enable or disable double buffering
-
     /**
+     * enable or disable double buffering
      * @default
      * @type {boolean}
      * @instance
@@ -434,20 +474,24 @@ module.exports = {
     getTextHeight: getTextHeight,
 
 
+    // TODO: check if needed
     /**
+     * Define the number of fixed columns (not re-orderable etc)
      * @default
      * @type {number}
      * @instance
      */
     fixedColumnCount: 0,
 
-    /**
+    // TODO: check if needed. Looks like it is not needed
+    /** Define the number of fixed columns (not re-orderable etc)
      * @default
      * @type {number}
      * @instance
      */
     fixedRowCount: 0,
 
+    // TODO: check if needed. Looks like it is not needed
     /**
      * @default
      * @type {number}
@@ -463,14 +507,16 @@ module.exports = {
      */
     showRowNumbers: true,
 
+    // TODO: remove this
     /**
      * @default
      * @type {boolean}
      * @instance
      */
-    showTreeColumn: true,
+    showTreeColumn: false,
 
     /**
+     * Showe / hide the table header
      * @default
      * @type {boolean}
      * @instance
@@ -496,15 +542,16 @@ module.exports = {
      * @type {boolean}
      * @instance
      */
-    rowSelection: true,
+    rowSelection: false,
 
     /**
      * @default
      * @type {boolean}
      * @instance
      */
-    singleRowSelectionMode: true,
+    singleRowSelectionMode: false,
 
+    // TODO: remove this
     /**
      * @default
      * @type {cssColor}
@@ -512,6 +559,7 @@ module.exports = {
      */
     selectionRegionOverlayColor: 'rgba(0, 0, 48, 0.2)',
 
+    // TODO: remove this
     /**
      * @default
      * @type {string}
@@ -533,6 +581,7 @@ module.exports = {
      */
     rowNumberAutosizing: true,
 
+    // TODO: investigate what it is
     /**
      * @default
      * @type {boolean}
@@ -547,27 +596,31 @@ module.exports = {
      */
     rowResize: false,
 
+    // TODO: looks like is not needed or is broken now
     /**
      * @default
      * @type {boolean}
      * @instance
      */
-    editable: true,
+    editable: false,
 
+    // TODO: looks like is not needed or is broken now
     /**
      * @default
      * @type {boolean}
      * @instance
      */
-    editOnDoubleClick: true,
+    editOnDoubleClick: false,
 
     /**
      * @default
      * @type {number}
      * @instance
      */
-    doubleClickDelay: 325,
+    doubleClickDelay: 1,
 
+
+    // TODO: Looks like the grid level props are broken or not needed. double check
     /**
      * Grid-level property.
      * When user presses a printable character key _or_ BACKSPACE _or_ DELETE:
@@ -584,6 +637,7 @@ module.exports = {
      */
     editOnKeydown: true,
 
+    // TODO: remove this
     /**
      * @default
      * @type {boolean}
@@ -622,35 +676,38 @@ module.exports = {
      * @property {cssColor} [header.backgroundColor=backgroundColor] - for columns and rows, this is the background color of the column or row "handle" (header rows or columns, respectively). (Not used for cells.)
      */
 
+    // TODO: remove this
     /** On mouse hover, whether to repaint the cell background and how.
      * @type {hoverColors}
      * @default '{ enabled: true, background: rgba(160, 160, 40, 0.30) }'
      */
     hoverCellHighlight: {
-        enabled: true,
-        backgroundColor: 'rgba(160, 160, 40, 0.45)'
+        enabled: false,
+        backgroundColor: 'transparent'
     },
 
+    // TODO: remove this
     /** On mouse hover, whether to repaint the row background and how.
      * @type {hoverColors}
      * @default '{ enabled: true, background: rgba(100, 100, 25, 0.15) }'
      */
     hoverRowHighlight: {
-        enabled: true,
-        backgroundColor: 'rgba(100, 100, 25, 0.30)'
+        enabled: false,
+        backgroundColor: 'transparent'
 
     },
 
+    // TODO: remove this
     /** On mouse hover, whether to repaint the column background and how.
      * @type {hoverColors}
      * @default '{ enabled: true, background: rgba(60, 60, 15, 0.15) }'
      */
     hoverColumnHighlight: {
-        enabled: true,
-        backgroundColor: 'rgba(60, 60, 15, 0.15)'
+        enabled: false,
+        backgroundColor: 'transparent'
     },
 
-
+    // TODO: remove this
     /** Display cell font with under-score line drawn over it.
      * > Implementation of links right now is not automatic; you must attach a 'fin-click' listener to the hypergrid object, etc.
      * @type {boolean}
@@ -658,17 +715,19 @@ module.exports = {
      */
     link: false,
 
+    // TODO: remove this
     /** Display cell font with strike-through line drawn over it.
      * @type {boolean}
      * @default
      */
     strikeThrough: false,
 
+    // TODO: remove this
     /** Ignore sort interaction (double-click).
      * @type {boolean}
      * @default
      */
-    unsortable: false,
+    unsortable: true
 
 };
 
